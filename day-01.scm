@@ -20,14 +20,12 @@
 ;; 91212129 produces 9 because the only digit that matches the next one is the last digit, 9.
 ;; What is the solution to your captcha?
 
-(define listIntegers
-  (lambda (string)
-    (map char->integer (string->list string))))
-
 (define listNumbersFromString
-  (lambda (string)
-    (map (lambda (char) (- char 48))
-         (listIntegers string))))
+  (let ([listIntegers
+         (lambda (string) (map char->integer (string->list string)))])
+    (lambda (string)
+      (map (lambda (char) (- char 48))
+           (listIntegers string)))))
 
 (define processList
   (lambda (lat accumulator)
