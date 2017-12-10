@@ -1,22 +1,22 @@
 const { readFileSync } = require('fs')
-
 const list = readFileSync('./data.txt').toString().split('\n').map(i => parseInt(i))
 
-var counter = 0
-var position = 0
+function solvePart1 (rawList) {
+  var list = rawList.concat([])
+  var counter = 0
+  var position = 0
 
- do {
-  console.log({ counter, position, val: list[position] })
+  do {
+    var nextPosition = position + list[position]
 
-  var nextPosition
+    list[position] = list[position] + 1
 
-  // do jump
-  nextPosition = position + list[position]
-  list[position] = list[position] + 1
+    position = nextPosition
 
-  position = nextPosition
+    counter++
+  } while (list[position] !== undefined)
 
-  counter++
-} while (list[position] !== undefined)
+  return counter
+}
 
-console.log("result:", counter)
+console.log(`Part 1: ${solvePart1(list)}`)
